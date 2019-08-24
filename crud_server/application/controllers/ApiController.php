@@ -50,4 +50,21 @@ class ApiController extends CI_Controller {
   }	
 
 }
+
+public function ShowDataUser (){
+	$result = $this->db->get('tb_user');
+
+	if($result-> num_rows() > 0){
+		$data['message'] = "Berhasil Mendapatkan Data user";
+		$data['status'] = true;
+		$data['response_code'] = 200; 
+		$data['data'] = $result ->result();
+	} else {
+		$data['message'] = "Gagal Mendapatkan Data user";
+		$data['status'] = false;
+		$data['response_code'] = 500; 
+
+	}
+	echo json_encode($data);
+}
 }
