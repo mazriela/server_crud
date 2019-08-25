@@ -67,4 +67,37 @@ public function ShowDataUser (){
 	}
 	echo json_encode($data);
 }
+
+public function edit_user(){
+	$id_user = $this-input->post('id_user');
+	$nama_user = $this-input->post('nama_user');
+	$email_user = $this-input->post('email_user');
+	$no_hp_user = $this-input->post('no_hp_user');
+	$alamat = $this-input->post('alamat');
+
+	$check = $this->db->get('tb_user');
+
+	$if($check -> num_rows() > 0 ){
+	$this->db->where('id_user',$id_user);
+
+	$simpan['nama_user'] = $nama_user;
+	$simpan['email_user'] = $emai_user;
+	$simpan['no_hp_user'] = $no_hp_user;
+	$simpan['alamat'] = $alamat;
+
+	$hasil = $this->db->where('id_user',$id_user)->update('tb_user,$simpan);
+	$if(hasil){
+		$data['message'] = 'Berhasil edit data user';
+		$data['status'] =true;
+		$data['response_code'] = 200;
+	} else {
+		$data['message'] = 'Gagal edit data user';
+    	$data['status'] =false;
+    	$data['response_code'] = 404;
+
+	}
+	echo json_encode($data);
+
+}
+
 }
