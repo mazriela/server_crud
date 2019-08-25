@@ -67,4 +67,25 @@ public function ShowDataUser (){
 	}
 	echo json_encode($data);
 }
+
+public function DeleteDataUser(){
+	$id_user = $this->input->post('id_user');
+	$check_hapus['id_user'] = $id_user;
+
+	//action hapus
+	$hapus = $this->db->delete('tb_user', $check_hapus);
+
+	if($hapus){
+	$data['message'] = 'Berhasil menghapus data';
+	$data['status'] = true;
+	$data['response_code'] = 200;
+
+	} else {
+	$data['message'] = 'Gagal menghapus data';
+	$data['status'] = false;
+	$data['response_code'] = 404;
+
+	}
+	echo ison_encode($data);
+}
 }
